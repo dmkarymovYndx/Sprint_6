@@ -24,12 +24,12 @@ public class LionTests {
     // проверка: при вводе неверного параметра sex в конструкторе появляется исключение с ожидаемым текстом
     @Test
     public void doesHaveManeThrowsExpectedException() {
-        String expected = "Используйте допустимые значения пола животного - самей или самка";
-        try {
+        Exception exception = Assert.assertThrows(Exception.class, () -> {
             Lion lion = new Lion("Лев", feline);
-        } catch(Exception e) {
-            Assert.assertEquals("Ошибка: сообщение в исключении не соответствует ожидаемому", expected, e.getMessage());
-        }
+        });
+        String expected = "Используйте допустимые значения пола животного - самей или самка";
+        String actual = exception.getMessage();
+        Assert.assertEquals("Ошибка: сообщение в исключении не соответствует ожидаемому", expected, actual);
     }
 
     // проверка: метод getKittens() вызывает такой же метод класса Feline
